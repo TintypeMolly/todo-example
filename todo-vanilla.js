@@ -12,8 +12,10 @@ function render() {
         const firstCell = document.createElement('td');
         firstCell.innerText = 'Empty';
         const secondCell = document.createElement('td');
+        const thirdCell = document.createElement('td');
         emptinessNoticeRow.appendChild(firstCell);
         emptinessNoticeRow.appendChild(secondCell);
+        emptinessNoticeRow.appendChild(thirdCell);
         tableBody.appendChild(emptinessNoticeRow);
     } else {
         for (let item of todoItems) {
@@ -47,10 +49,20 @@ function createTodoItemElement(item) {
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
     item.done && checkbox.setAttribute('checked', '');
-    checkbox.addEventListener('change', function(event) {
-        item.done = this.checked;
+    checkbox.addEventListener('change', event => {
+        item.done = event.target.checked;
     });
     doneCell.appendChild(checkbox);
+
+    const deleteCell = document.createElement('td');
+    row.appendChild(deleteCell);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'delete';
+    deleteCell.appendChild(deleteButton);
+    deleteCell.addEventListener('click', () => {
+        removeTodoItem(item);
+    });
 
     return row;
 }
