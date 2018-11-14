@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+    <title>Vanilla</title>
+</head>
+<body>
+    <h1>Vanilla TODO App</h1>
+    <div id="app">
+        <div>
+            <input id="name-input" type="text"/>
+            <button onclick="addTodoItem()">Add</button>
+        </div>
+        <div id="todo-items">
+            <table>
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>done</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Loading...</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript" src="todo-vanilla.js"></script>
+</body>
+</html>
