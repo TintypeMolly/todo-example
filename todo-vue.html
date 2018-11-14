@@ -20,8 +20,8 @@
     <h1>Vue TODO App</h1>
     <div id="app">
         <div>
-            <input id="name-input" type="text"/>
-            <button onclick="addTodoItem()">Add</button>
+            <input v-model="newTodoName" type="text"/>
+            <button @click="addItem(newTodoName)">Add</button>
         </div>
         <div id="todo-items">
             <table>
@@ -29,22 +29,29 @@
                     <tr>
                         <th>
                             name
-                            <button onclick="setAscending()">&#9650;</button>
-                            <button onclick="setDescending()">&#9660;</button>
-                            <button onclick="unsetSort()">X</button>
+                            <button @click="sortOrder = 'asc'">&#9650;</button>
+                            <button @click="sortOrder = 'dsc'">&#9660;</button>
+                            <button @click="sortOrder = null">X</button>
                         </th>
                         <th>
                             done
-                            <button onclick="setDoneFilter()">done</button>
-                            <button onclick="setUndoneFilter()">undone</button>
-                            <button onclick="unsetFilter()">X</button>
+                            <button @click="filter = 'done'">done</button>
+                            <button @click="filter = 'undone'">undone</button>
+                            <button @click="filter = null">X</button>
                         </th>
                         <th>remove</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="processedTodoItems.length > 0">
+                    <tr v-for="item in processedTodoItems">
+                        <td>{{ item.name }}</td>
+                        <td><input type="checkbox" v-model="item.done"/></td>
+                        <td><button @click="removeItem(item)">delete</button></td>
+                    </tr>
+                </tbody>
+                <tbody v-else>
                     <tr>
-                        <td>Loading...</td>
+                        <td>Empty</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -52,6 +59,7 @@
             </table>
         </div>
     </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script type="text/javascript" src="todo-vue.js"></script>
 </body>
 </html>
