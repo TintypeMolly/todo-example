@@ -1,4 +1,5 @@
 let todoItems = [];
+let sortOrder = null;
 
 function render() {
     const table = document.getElementById('todo-items');
@@ -18,7 +19,16 @@ function render() {
         emptinessNoticeRow.appendChild(thirdCell);
         tableBody.appendChild(emptinessNoticeRow);
     } else {
-        for (let item of todoItems) {
+        const sortedTodoItems = todoItems.concat();
+        if (!!sortOrder) {
+            sortedTodoItems.sort(
+                (item1, item2) => (
+                    (sortOrder === 'asc' ? 1 : -1) *
+                    item1.name.localeCompare(item2.name)
+                )
+            );
+        }
+        for (let item of sortedTodoItems) {
             tableBody.appendChild(createTodoItemElement(item));
         }
     }
@@ -68,12 +78,17 @@ function createTodoItemElement(item) {
 }
 
 function setAscending() {
-    todoItems.sort((item1, item2) => item1.name.localeCompare(item2.name));
+    sortOrder = 'asc';
     render();
 }
 
 function setDescending() {
-    todoItems.sort((item1, item2) => -item1.name.localeCompare(item2.name));
+    sortOrder = 'dsc';
+    render();
+}
+
+function unsetSort() {
+    sortOrder = null;
     render();
 }
 
