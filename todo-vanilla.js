@@ -1,5 +1,6 @@
 let todoItems = [];
 let sortOrder = null;
+let filter = null;
 
 function render() {
     const table = document.getElementById('todo-items');
@@ -28,7 +29,10 @@ function render() {
                 )
             );
         }
-        for (let item of sortedTodoItems) {
+        const sortedFilteredTodoItems = !!filter ?
+            sortedTodoItems.filter(item => (filter === 'done' && item.done) || (filter === 'undone' && !item.done)) :
+            sortedTodoItems;
+        for (let item of sortedFilteredTodoItems) {
             tableBody.appendChild(createTodoItemElement(item));
         }
     }
@@ -89,6 +93,21 @@ function setDescending() {
 
 function unsetSort() {
     sortOrder = null;
+    render();
+}
+
+function setDoneFilter() {
+    filter = 'done';
+    render();
+}
+
+function setUndoneFilter() {
+    filter = 'undone';
+    render();
+}
+
+function unsetFilter() {
+    filter = null;
     render();
 }
 
