@@ -67,4 +67,14 @@ function createTodoItemElement(item) {
     return row;
 }
 
+function setAscending() {
+    todoItems.sort((item1, item2) => item1.name.localeCompare(item2.name));
+    render();
+}
+
+function setDescending() {
+    todoItems.sort((item1, item2) => -item1.name.localeCompare(item2.name));
+    render();
+}
+
 render();
